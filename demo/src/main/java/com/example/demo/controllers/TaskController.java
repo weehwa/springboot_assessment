@@ -41,23 +41,23 @@ public class TaskController {
     }
 
     @GetMapping("/completed")
-    public ResponseEntity<Object> getAllCompletedTasks(@RequestParam(required = false) Long id) {
+    public ResponseEntity<Object> getAllCompletedTasks() {
         List<Task> completedTasks = taskService.findAllCompletedTask();
 
         if (completedTasks != null && !completedTasks.isEmpty()) {
             return ResponseEntity.ok(completedTasks);
         } else {
-            throw new ResourceNotFoundException(id);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No Completed Task found");
         }
     }
 
     @GetMapping("/incomplete")
-    public ResponseEntity<Object> getAllIncompleteTasks(@RequestParam(required = false) Long id) {
+    public ResponseEntity<Object> getAllIncompleteTasks() {
         List<Task> inCompletedTasks = taskService.findAllInCompleteTask();
         if (inCompletedTasks != null && !inCompletedTasks.isEmpty()) {
             return ResponseEntity.ok(inCompletedTasks);
         } else {
-            throw new ResourceNotFoundException(id);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No uncompleted Task found");
         }
     }
 
