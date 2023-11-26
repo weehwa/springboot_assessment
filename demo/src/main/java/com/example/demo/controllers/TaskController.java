@@ -74,7 +74,7 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateTask(@Valid @PathVariable("id") Long id, @RequestBody Task task) {
+    public ResponseEntity<Object> updateTask(@PathVariable("id") Long id, @Valid @RequestBody Task task) {
         Task result = taskService.updateTask(id, task).orElseThrow(() -> new ResourceNotFoundException(id));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
